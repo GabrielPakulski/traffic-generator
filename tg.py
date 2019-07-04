@@ -51,9 +51,13 @@ def main():
         sleep_timer = sleep_timer/1.125
 
         while True:
-                udp.sendto(message,dest)
-                time.sleep(sleep_timer)
-
+                seg = 1.0
+                time2 = 0.0
+                for packet in range(0,rate_in_datagrams):
+                    udp.sendto(message,dest)
+                    time.sleep(sleep_timer)
+                    time2 = time2 + sleep_timer
+                sleep(seg - time2)
 
 if __name__ == '__main__':
     main()
